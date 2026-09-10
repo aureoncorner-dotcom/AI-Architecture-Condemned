@@ -1,0 +1,29 @@
+{
+  "name": "Direct Service Ablation Spec v1",
+  "scope": "Retained AO30-covered route representation",
+  "principle": "Delete separate interposition/status/bookkeeping records while preserving the substantive answer verbatim.",
+  "safe_exact_ablations_in_retained_representation": [
+    "CHECKING",
+    "WORK_STATUS",
+    "PREAMBLE",
+    "THOUGHTS",
+    "REASONING_RECAP",
+    "HIDDEN_META"
+  ],
+  "conditional_ablations": [
+    {
+      "stage": "TOOL",
+      "rule": "Do not delete a tool call/result if the final answer depends on it; only suppress tool plumbing from the user-facing stream."
+    },
+    {
+      "stage": "SYSTEM/MODEL_CONTEXT",
+      "rule": "May remain internal; user-facing suppression does not imply runtime removal."
+    },
+    {
+      "stage": "ASSISTANT_ONLY_CONTINUATION",
+      "rule": "Prior answer remains if continuation is removed, but service completeness must be adjudicated separately."
+    }
+  ],
+  "target_user_visible_route": "USER -> ANSWER",
+  "correction_binding_rule": "After an explicit correction, the next eligible user-facing behavior must omit the prohibited interposition unless needed for the task itself."
+}
